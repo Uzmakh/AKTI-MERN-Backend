@@ -1,10 +1,11 @@
-
 const express = require("express");    // pkg express
 const connectToMongodb = require("./config/db");
 
 connectToMongodb()
 const app = express();        //initialize
 const port = 5000;
+
+app.use(express.json());
 
 // default route
 app.get("/", (req, res) => {
