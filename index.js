@@ -4,12 +4,16 @@ const connectToMongodb = require("./config/db");
 
 connectToMongodb()
 const app = express();        //initialize
+const port = 5000;
 
-const port = 5000;         //hard coded port
 // default route
 app.get("/", (req, res) => {
     res.send("Hello  from Node.js Backend server!");
 });
+
+// Available routes
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/notes', require('./routes/notes'));
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
