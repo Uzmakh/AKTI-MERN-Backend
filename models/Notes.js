@@ -1,9 +1,8 @@
-const express = require('express');
+// const express = require('express');
 const mongoose = require('mongoose');
-
 const { Schema } = mongoose;
 
-const NotesSchema = new Schema({
+const NoteSchema = new Schema({
     title: {
         type: String,
         required: true
@@ -14,7 +13,7 @@ const NotesSchema = new Schema({
     },
     tags: {
         type: Array,
-        default: "General"
+        default: ["general"]
     },
     date: {
         type: Date,
@@ -22,4 +21,4 @@ const NotesSchema = new Schema({
     },
 });
 
-module.exports = mongoose.model('Notes', NotesSchema);
+module.exports = mongoose.model('Notes', NoteSchema);
