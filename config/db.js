@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
-
 const { config } = require("dotenv");
-// copy the connection string from mongodb comapss
 
 config(); // Load environment variables from .env file
 
+// copy the connection string from mongodb compass
 const MONGODBURI =
     process.env.MONGODBURI || "mongodb://127.0.0.1:27017/aktiMernProject";
 
