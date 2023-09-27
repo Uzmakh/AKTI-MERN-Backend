@@ -1,12 +1,13 @@
 const express = require("express");
 const connectToMongodb = require("./config/db");
-// var cors = require('cors');
+const cors = require('cors');
 const { config } = require("dotenv");
 const Note = require("./models/Notes");
 config(); // Load environment variables from .env file
 
 connectToMongodb();
 const app = express();        //initialize
+app.use(cors())
 const PORT = process.env.PORT || 5000;
 
 // app.use(cors())

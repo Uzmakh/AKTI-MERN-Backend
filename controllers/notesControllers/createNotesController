@@ -10,19 +10,22 @@ const createNotesController = async (req, res) => {
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
+
     // if user fills input
     try {
-        // console.log("try block")
-        const note = {
-            title: req.body.title,
-            description: req.body.description,
-            tags: req.body.tags,
-        };
+        console.log("try block");
+        const { title, description, tags } = req.body;  // Destructure the request body
+        const note = new Note({
+            title,
+            description,
+            tags,
+        });
         console.log(note)
-        await note.save(); // command to save in mongo db
+        await note.save(); // command to save in MongoDB
         return res.status(201).json(note);
     } catch (error) {
-        // if failure
+        console.error(error);
+        return res.status(500).json({ error: 'Server error' }); // Handle other errors
     }
 }
 
