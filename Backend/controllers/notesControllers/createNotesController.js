@@ -13,14 +13,12 @@ const createNotesController = async (req, res) => {
 
     // if user fills input
     try {
-        console.log("try block");
         const { title, description, tags } = req.body;  // Destructure the request body
         const note = new Note({
             title,
             description,
             tags,
         });
-        console.log(note)
         await note.save(); // command to save in MongoDB
         return res.status(201).json(note);
     } catch (error) {

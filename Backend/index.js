@@ -1,3 +1,4 @@
+// ES-5 Import Syntax
 const express = require("express");
 const connectToMongodb = require("./config/db");
 const cors = require('cors');
@@ -8,9 +9,8 @@ config(); // Load environment variables from .env file
 connectToMongodb();
 const app = express();        //initialize
 app.use(cors())
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
-// app.use(cors())
 // Middleware to parse JSON data from requests
 app.use(express.json());
 
@@ -27,10 +27,9 @@ app.get("/api/v1/login", (req, res) => {
 });
 
 // Available routes
-//  get notes
-app.use('/api/v1/', require('./routes/notesRoutes/getNotesRoute'));
-// create notes
-app.use('/api/v1/', require('./routes/notesRoutes/createNotesRoute'));
+
+// \ notes routes
+app.use('/', require('./routes/index')); // routes/index.js
 
 app.listen(PORT, () => {
     console.log(`Example app listening on port http://localhost:${PORT}`);
