@@ -1,36 +1,34 @@
-// ES-5 Import Syntax
+// es 5 import syntax
 const express = require("express");
 const connectToMongodb = require("./config/db");
-const cors = require('cors');
+const cors = require("cors")
 const { config } = require("dotenv");
-const Note = require("./models/Notes");
 config(); // Load environment variables from .env file
-
-connectToMongodb();
-const app = express();        //initialize
-app.use(cors())
-const PORT = process.env.PORT;
+connectToMongodb()
+const app = express();
 
 // Middleware to parse JSON data from requests
 app.use(express.json());
+// add middleware to parse form data instead of JSON
+app.use(express.urlencoded({ extended: true }));
+// use a static folder
+app.use(express.static('public'))
 
+app.use(cors())
+const PORT = process.env.PORT;
 // default route
-app.get("/", (req, res) => {
-    res.send("Hello working!");
-});
-// Just Examples for routes
-app.get("/api/v1/signup", (req, res) => {
-    res.send("Hello SignUp!");
-});
-app.get("/api/v1/login", (req, res) => {
-    res.send("Hello LogIn!");
+app.get("/api/v1/contact", (req, res) => {
+    res.send("Hello From Node js server!");
 });
 
-// Available routes
+// available routes
+// app.use('/api/v1/', require('./routes/notesRoutes/notesRoute'))
+app.use('/', require('./routes'));
 
-// \ notes routes
-app.use('/', require('./routes/index')); // routes/index.js
+
+
+// const LOCAL_IP = "10.50.75.24" // env
 
 app.listen(PORT, () => {
-    console.log(`Example app listening on port http://localhost:${PORT}`);
+    console.log(`Example app listening on the http://localhost:${PORT}`);
 });
