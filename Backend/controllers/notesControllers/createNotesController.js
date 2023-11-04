@@ -13,18 +13,16 @@ const createNotesController = async (req, res) => {
 
     // if user fills input
     try {
-        const { title, description, tags } = req.body;  // Destructure the request body
         const note = new Note({
-            title,
-            description,
-            tags,
+            title: req.body.title,
+            description: req.body.description,
+            tags: req.body.tags,
         });
         await note.save(); // command to save in MongoDB
         return res.status(201).json(note);
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: 'Server error' }); // Handle other errors
+    //   if failure
     }
 }
-
+// ES5 export syntax
 module.exports = createNotesController;
